@@ -18,6 +18,14 @@ _color_crit=#e89393
 #command=xtitle -s
 #interval=persist
 
+[caplock]
+command=~/scripts/i3blocks/caplock.sh
+interval=once
+signal=8
+markup=pango
+_enabled_caption=<b>CAPLOCK</b>
+
+
 [brightness]
 command=~/scripts/i3blocks/display_brightness.sh
 interval=5
