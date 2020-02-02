@@ -10,9 +10,9 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 
-exec_always --no-startup-id killall picom && picom -b
 exec --no-startup-id feh --bg-fill ~/Bilder/wallpaper.png
 exec --no-startup-id sh ~/.config/i3/auto-screen-rotate.sh eDP1 &
+exec_always --no-startup-id killall picom; picom -b --log-file /tmp/picom.log
 
 set $mod Mod4
 
@@ -253,3 +253,6 @@ mode "$mode_system" {
 bindsym XF86PowerOff mode "$mode_system"
 
 bindsym --release Caps_Lock exec pkill -RTMIN+8 i3blocks
+
+
+
