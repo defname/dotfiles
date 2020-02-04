@@ -198,7 +198,7 @@ bar {
     position          top
     # mode              hide
     workspace_buttons yes
-    tray_output       none
+    tray_output       primary
 
     
     colors {
