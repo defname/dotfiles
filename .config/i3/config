@@ -12,6 +12,7 @@
 
 exec --no-startup-id feh --bg-fill ~/Bilder/wallpaper.png
 exec --no-startup-id sh ~/.config/i3/auto-screen-rotate.sh eDP1 &
+exec --no-startup-id dunst &
 exec_always --no-startup-id killall picom; picom -b --log-file /tmp/picom.log
 
 set $mod Mod4
