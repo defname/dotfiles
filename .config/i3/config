@@ -190,6 +190,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
     #font pango:monospace, FontAwesome 10
+    font pango:statusline-icons
     font pango:FontAwesome mono 10
 
     # status_command i3status

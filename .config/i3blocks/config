@@ -9,7 +9,7 @@ _color_warn=#ccdc90
 _color_crit=#e89393
 
 #[test]
-#command=~/scripts/i3blocks/test.sh
+#command=echo -e '\ue90c'
 #interval=2
 #markup=pango
 #_perc=95
@@ -18,6 +18,7 @@ _color_crit=#e89393
 command=~/scripts/i3blocks/active_window.sh
 interval=persist
 markup=pango
+separator_block_width=70
 _format=<span color="#808080">{title}</span>
 
 [caplock]
@@ -27,18 +28,25 @@ signal=8
 markup=pango
 _enabled_caption=<b>CAPLOCK</b>
 
+[checkupdates]
+command=~/scripts/i3blocks/checkforupdates.sh
+interval=5
+markup=pango
+_format=<span color="{color}"><big>{icon}</big> {count}</span>
 
 [brightness]
 command=~/scripts/i3blocks/display_brightness.sh
 interval=5
 signal=9
-color=#ffffff
+markup=pango
+_format=<span color="{color}"><big>{icon}</big> {brightness}%</span>
 
 [volume]
 command=~/scripts/i3blocks/volume.sh
 interval=5
 markup=pango
 signal=10
+_format=<span color="{color}"><big>{icon}</big> {vol}%</span>
 
 [ethernet]
 command=~/scripts/i3blocks/eth_connection.sh
@@ -50,19 +58,20 @@ _format_no_connection=
 command=~/scripts/i3blocks/wlan_connection.sh
 interval=2
 markup=pango
-#_use_signal_icons=1
-_format_no_connection={icon}
-_format={icon} {ssid} {signal}%
+_use_signal_icons=1
+_format_no_connection=<span color="{color}"><big>{icon}</big></span>
+_format=<span color="{color}"><big>{icon}</big> {ssid}</span>
 
 [battery2]
 command=~/scripts/i3blocks/battery.sh
 interval=5
 markup=pango
 _bat=BAT1
-_format={icon} {perc}%
+_format=<span color="{color}"><big>{icon}</big> {perc}%</span>
 
 [time]
 command=~/scripts/i3blocks/time.sh
 interval=10
-
+markup=pango
+_format=<big>{icon}</big> <b>{time}</b>
 
