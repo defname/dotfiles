@@ -10,6 +10,7 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 
+exec --no-startup-id ~/scripts/lock_before_sleep.py > /tmp/lock_before_sleep.log &
 exec --no-startup-id feh --bg-fill ~/Bilder/wallpaper.png
 exec --no-startup-id sh ~/.config/i3/auto-screen-rotate.sh eDP1 &
 exec --no-startup-id dunst &
@@ -243,7 +244,7 @@ set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s)
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym s exec --no-startup-id systemctl suspend, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"  
 

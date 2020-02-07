@@ -30,7 +30,7 @@ _enabled_caption=<b>CAPLOCK</b>
 
 [checkupdates]
 command=~/scripts/i3blocks/checkforupdates.sh
-interval=5
+interval=600
 markup=pango
 _format=<span color="{color}"><big>{icon}</big> {count}</span>
 
