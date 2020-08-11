@@ -10,7 +10,20 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 
-exec --no-startup-id ~/scripts/lock_before_sleep.py > /tmp/lock_before_sleep.log &
+# Workspace names
+set $ws1 "1:<span color='#e99393'></span>"
+set $ws2 "2:<span color='#ccdc90'></span>"
+set $ws3 "3:<span color='#88b090'></span>"
+set $ws4 4
+set $ws5 5
+set $ws6 6
+set $ws7 7
+set $ws8 8
+set $ws9 9
+set $ws10 10
+
+exec --no-startup-id ((systemd-inhibit --what=sleep --mode=delay xss-lock ~/.config/i3/i3lock_customized.sh); i3-nagbar -m "Automatical screenlock got killed!") &
+#exec --no-startup-id ~/scripts/lock_before_sleep.py > /tmp/lock_before_sleep.log &
 exec --no-startup-id feh --bg-fill ~/Bilder/wallpaper.png
 exec --no-startup-id sh ~/.config/i3/auto-screen-rotate.sh eDP1 &
 exec --no-startup-id dunst &
@@ -128,31 +141,40 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+# bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
+# make window sticky
+bindsym $mod+Shift+s sticky toggle
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -202,16 +224,24 @@ bar {
     # mode              hide
     workspace_buttons yes
     tray_output       primary
+    strip_workspace_numbers yes
 
     
     colors {
         background #000000
-        statusline #ffffff
+        #statusline #ffffff
 
-        focused_workspace  #ffffff #285577
-        active_workspace   #ffffff #333333
-        inactive_workspace #888888 #222222
-        urgent_workspace   #ffffff #900000
+        focused_workspace  #333333 #333333 #ffffff
+        active_workspace   #000000 #000000 #000000
+        inactive_workspace #000000 #000000 #999999
+        urgent_workspace   #ffffff #900000 #000000
+    }
+    colors {
+        #background #073642
+        #statusline #eee8d5
+        #focused_workspace #cb4b16 #cb4b16 #eee8d5
+        #active_workspace #cb4b16 #cb4b16 #eee8d5
+        #inactive_workspace #b58900 #b58900 #eee8d5
     }
 }
 
@@ -258,4 +288,5 @@ bindsym XF86PowerOff mode "$mode_system"
 bindsym --release Caps_Lock exec pkill -RTMIN+8 i3blocks
 
 
-
+# Assign specific programs to workspaces
+assign [class="^firefox$"] $ws1
