@@ -6,6 +6,7 @@ FORMAT="{title}"
 apply_config_value "_format" "FORMAT"
 
 declare -A FIELDS
+FIELDS["title"]=" "
 
 xtitle -s -f '%u\n' | while read ID; do
 	XPROP=$(xprop -id $ID)
@@ -18,6 +19,9 @@ xtitle -s -f '%u\n' | while read ID; do
 	else
 		FIELDS["title"]="$NAME"
 	fi
+    if [[ "${FIELDS["title"]}"=="" ]]; then
+        FIELDS["title"]=" "
+    fi
     FIELDS["color"]="#999999"
 	style_output "$(format_output "$FORMAT")"
 done 

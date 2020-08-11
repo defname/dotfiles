@@ -11,11 +11,14 @@
 
 
 # Workspace names
-set $ws1 "1:<span color='#e99393'></span>"
-set $ws2 "2:<span color='#ccdc90'></span>"
-set $ws3 "3:<span color='#88b090'></span>"
-set $ws4 4
-set $ws5 5
+#set $ws1 "1:<span color='#e99393'></span>"
+#set $ws2 "2:<span color='#ccdc90'></span>"
+#set $ws3 "3:<span color='#88b090'></span>"
+set $ws1 "1:<span color='#027ca0'></span>"
+set $ws2 "2:<span color='#027ca0'></span>"
+set $ws3 "3:<span color='#027ca0'></span>"
+set $ws4 "4:<span color='#027ca0'></span>"
+set $ws5 "5:<span color='#027ca0'></span>"
 set $ws6 6
 set $ws7 7
 set $ws8 8
@@ -212,7 +215,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    #font pango:monospace, FontAwesome 10
+    #font pango:monospace 10
     font pango:statusline-icons
     font pango:FontAwesome mono 10
 
@@ -226,7 +229,6 @@ bar {
     tray_output       primary
     strip_workspace_numbers yes
 
-    
     colors {
         background #000000
         #statusline #ffffff
@@ -236,13 +238,13 @@ bar {
         inactive_workspace #000000 #000000 #999999
         urgent_workspace   #ffffff #900000 #000000
     }
-    colors {
+    #colors {
         #background #073642
         #statusline #eee8d5
         #focused_workspace #cb4b16 #cb4b16 #eee8d5
         #active_workspace #cb4b16 #cb4b16 #eee8d5
         #inactive_workspace #b58900 #b58900 #eee8d5
-    }
+    #}
 }
 
 

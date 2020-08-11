@@ -8,6 +8,7 @@ import subprocess
 import gi
 import signal
 from gi.repository import GLib
+import sys
 
 # make sure there is just one instance of screenlocker running
 # in this case, its handled by the script called
@@ -24,8 +25,11 @@ def log(txt):
 
 def sigterm_handler(_signo, _stack_frame):
     log("Exit")
-    loop.quit()
-    GLib.idle_add(quit)
+    os.remove("/tmp/lock_before_sleep.pid")
+    os.system("nohup i3-nagbar -t warning -m 'lock_before_sleep.py got terminated, that means your screen will not be locked automatically before sleep. This is bad! Do you want to restart it?' -B 'Damn yes, restart!' 'nohup ~/scripts/lock_before_sleep.py &; killall i3-nagbar'")
+    os.system("notify-send -u critical -a \"lock_before_sleep.py\" -c warning \"Screenlocker killed\" \"python3 got killed, restart lock_before_sleep.py, otherwise the screen will not be locked automatically before sleep\"")
+    # loop.quit()
+    # GLib.idle_add(quit)
 
 def handle_sleep(mode):
     global lock
@@ -49,9 +53,18 @@ bus.add_signal_receiver(               # define the signal to listen to
 
 signal.signal(signal.SIGINT, sigterm_handler)
 signal.signal(signal.SIGTERM, sigterm_handler)
+#signal.signal(signal.SIGKILL, sigterm_handler)
 
 loop = GLib.MainLoop()
 
+# quit if script is running already running
+if os.path.isfile("/tmp/lock_before_sleep.pid"):
+    log("script is already running, pidfile exists")
+    sys.exit(1)
+
+with open("/tmp/lock_before_sleep.pid", 'w') as f:
+    f.write(str(os.getpid()))
+    f.close()
 # tell systemd to wait for us
 lock = manager.Inhibit("sleep", "Screenlocker", "Locking screen...", "delay")
 loop.run()

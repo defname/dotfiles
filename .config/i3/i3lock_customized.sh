@@ -41,7 +41,7 @@ else # dark background so use the light icon
 fi
 
 # blur the screenshot by resizing and scaling back up
-convert "$tmpbg" -blur 0x6 "$tmpbg"
+convert "$tmpbg" -blur 0x8 "$tmpbg"
 #convert "$tmpbg" -alpha set -channel A -evaluate set 50% png32:"$tmpbg"
 # overlay the icon onto the screenshot
 convert "$tmpbg" "$icon" -gravity center -composite "$tmpbg"
